@@ -1,0 +1,54 @@
+#         === .NET ===
+bin/
+obj/
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+appsettings.Development.json
+appsettings.Local.json
+appsettings.*.local.json
+
+#security
+#**/appsettings.json
+#.env
+
+#         === .logs ===
+*.log
+logs/
+Logs/
+
+#         === IDE ===
+.DS_Store
+.Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.iml
+*.sln.iml
+
+#         === Tests ===
+coverage/
+*.lcov
+TestResults/
+test-results/
+
+#         === Database ===
+*.sql
+*.sql.gz
+*.bak
+*.db
+*.db-shm
+*.db-wal
+
+#         === Other ===
+/tmp/
+!.github/
+!.vscode/settings.json
+
+#         === System ===
+ehthumbs.db
+Icon?
+Desktop.ini

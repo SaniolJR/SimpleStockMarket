@@ -1,0 +1,33 @@
+services:
+  db:
+    image: postgres:15
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    # volume to remembrer data after containter restart
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  rest-api:
+    build:
+      context: ..
+      dockerfile: Infrastructure/Dockerfile
+    depends_on:
+      - db
+    environment:
+      - ConnectionStrings__DefaultConnection=Host=db;Database=${DB_NAME};Username=${DB_USER};Password=${DB_PASSWORD};
+
+  load-balancer:
+    image: nginx:latest
+    ports:
+      - "${APP_PORT}:80" 
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - rest-api
+
+volumes:
+  pgdata:

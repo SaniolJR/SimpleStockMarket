@@ -1,0 +1,6 @@
+@SimpleStockMarket_HostAddress = http://localhost:5034
+
+GET {{SimpleStockMarket_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
