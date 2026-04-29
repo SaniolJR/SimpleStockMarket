@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Controllers;
 
-namespace ServicesTests;
+namespace Tests.ServicesTests;
 
 public class ChaosServiceTests
 {

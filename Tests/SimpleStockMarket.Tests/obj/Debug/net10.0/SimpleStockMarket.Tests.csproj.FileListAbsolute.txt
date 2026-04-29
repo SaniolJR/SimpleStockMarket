@@ -19,6 +19,15 @@ C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Deb
 C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.dll
 C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.Abstractions.dll
 C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\Microsoft.Extensions.Logging.dll
+C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\Microsoft.Extensions.Options.dll
+C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\Microsoft.Extensions.Primitives.dll
 C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\Microsoft.OpenApi.dll
 C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\Microsoft.TestPlatform.CoreUtilities.dll
 C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\Microsoft.TestPlatform.PlatformAbstractions.dll

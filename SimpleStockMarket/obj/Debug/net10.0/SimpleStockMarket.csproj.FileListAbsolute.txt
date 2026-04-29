@@ -104,6 +104,7 @@ C:\Users\mateu\Desktop\simple_stock_market\SimpleStockMarket\obj\Debug\net10.0\S
 C:\Users\mateu\Desktop\simple_stock_market\SimpleStockMarket\obj\Debug\net10.0\SimpleStockMarket.csproj.CoreCompileInputs.cache
 C:\Users\mateu\Desktop\simple_stock_market\SimpleStockMarket\obj\Debug\net10.0\SimpleStockMarket.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\mateu\Desktop\simple_stock_market\SimpleStockMarket\obj\Debug\net10.0\SimpleStockMarket.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\mateu\Desktop\simple_stock_market\SimpleStockMarket\obj\Debug\net10.0\SimpleStockMarket.sourcelink.json
 C:\Users\mateu\Desktop\simple_stock_market\SimpleStockMarket\obj\Debug\net10.0\rjimswa.dswa.cache.json
 C:\Users\mateu\Desktop\simple_stock_market\SimpleStockMarket\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
 C:\Users\mateu\Desktop\simple_stock_market\SimpleStockMarket\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
@@ -119,4 +120,3 @@ C:\Users\mateu\Desktop\simple_stock_market\SimpleStockMarket\obj\Debug\net10.0\r
 C:\Users\mateu\Desktop\simple_stock_market\SimpleStockMarket\obj\Debug\net10.0\SimpleStockMarket.pdb
 C:\Users\mateu\Desktop\simple_stock_market\SimpleStockMarket\obj\Debug\net10.0\SimpleStockMarket.genruntimeconfig.cache
 C:\Users\mateu\Desktop\simple_stock_market\SimpleStockMarket\obj\Debug\net10.0\ref\SimpleStockMarket.dll
-C:\Users\mateu\Desktop\simple_stock_market\SimpleStockMarket\obj\Debug\net10.0\SimpleStockMarket.sourcelink.json
