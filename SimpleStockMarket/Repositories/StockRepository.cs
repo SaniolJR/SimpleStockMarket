@@ -15,4 +15,7 @@ public class StockRepository : IStockRepository
           return await _db.Stocks.FirstOrDefaultAsync(s => s.Name == name);
     }
 
+    public async Task<List<Stock>?> GetAllStocksAvailableAsync(){
+
+    }
 }
