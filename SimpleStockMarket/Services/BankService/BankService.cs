@@ -1,4 +1,5 @@
 using Entities;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Services;
 
@@ -26,14 +27,27 @@ public class BankService : IBankService
         return null;
     }
 
-    public Task GetBankState()
+    public async Task<List<Stock>> GetBankStateAsync()
     {
-        return null;
+        var bankState = new List<Stock>();
+
+        var stocksToAdd = await _stockRepository.GetAllStocksAvailableAsync();
+        bankState.AddRange(stocksToAdd);
+
+        return bankState;
     }
 
-    public Task SetNewBankState()
+    public async Task SetNewBankStateAsync(List<Stock> stocks)
     {
-        return null;
+        //Clear whole current data of stocks
+
+        await _stockRepository.ClearAllStocksAsync();
+
+        //If List is empty just clear whole database
+        if (!stocks.IsNullOrEmpty())
+        {
+            await _stockRepository.AddNewStocksAsync(stocks);
+        }
     }
 
 }

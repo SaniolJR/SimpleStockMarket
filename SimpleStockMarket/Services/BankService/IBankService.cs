@@ -8,7 +8,7 @@ public interface IBankService
 
     public Task ProcessSellRequest();
 
-    public Task GetBankState();
+    public Task<List<Stock>> GetBankStateAsync();
 
-    public Task SetNewBankState();
+    public Task SetNewBankStateAsync(List<Stock> stocks);
 }
