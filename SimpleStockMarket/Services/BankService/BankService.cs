@@ -11,14 +11,6 @@ public class BankService : IBankService
         _stockRepository = stockRepository;
     }
 
-    public async Task<Stock> GetStockByName(string name)
-    {
-        if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("Stock name was not given.");
-
-        var stock = await _stockRepository.GetByNameAsync(name);
-        if (stock == null) throw new InvalidOperationException($"Stock '{name}' not found.");
-        return stock;
-    }
     public Task ProcessBuyRequest(string name, int walletID)
     {
         //wydobyj obiekt akcji

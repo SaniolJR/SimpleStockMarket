@@ -4,7 +4,6 @@ namespace Services;
 
 public interface IBankService
 {
-    public Task<Stock> GetStockByName(string name);
     public Task ProcessBuyRequest(string name, int walletID);
 
     public Task ProcessSellRequest();

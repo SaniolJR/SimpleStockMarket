@@ -14,6 +14,8 @@ C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Deb
 C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\SimpleStockMarket.Tests.dll
 C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\SimpleStockMarket.Tests.pdb
 C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\Castle.Core.dll
+C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\Docker.DotNet.dll
+C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\Docker.DotNet.X509.dll
 C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\Microsoft.AspNetCore.OpenApi.dll
 C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\Microsoft.VisualStudio.CodeCoverage.Shim.dll
 C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.dll
@@ -40,6 +42,11 @@ C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Deb
 C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\Newtonsoft.Json.dll
 C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\Npgsql.dll
 C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\ICSharpCode.SharpZipLib.dll
+C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\Renci.SshNet.dll
+C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\SshNet.Security.Cryptography.dll
+C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\Testcontainers.dll
+C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\Testcontainers.PostgreSql.dll
 C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\xunit.assert.dll
 C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\xunit.core.dll
 C:\Users\mateu\Desktop\simple_stock_market\Tests\SimpleStockMarket.Tests\bin\Debug\net10.0\xunit.execution.dotnet.dll

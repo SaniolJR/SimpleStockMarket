@@ -10,9 +10,9 @@ public class StockRepository : IStockRepository
 
     public StockRepository(MainDbContext db) => _db = db;
 
-    public async Task<Stock?> GetByNameAsync(string name) 
-        => await _db.Stocks.FirstOrDefaultAsync(s => s.Name == name);
+    public async Task<Stock?> GetStockByNameAsync(string name)
+    {
+          return await _db.Stocks.FirstOrDefaultAsync(s => s.Name == name);
+    }
 
-    public async Task<Stock?> GetByIdAsync(int id) 
-        => await _db.Stocks.FirstOrDefaultAsync(s => s.Id == id);
 }

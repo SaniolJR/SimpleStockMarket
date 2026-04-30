@@ -556,6 +556,14 @@
               "target": "Package",
               "version": "[4.20.72, )"
             },
+            "Testcontainers": {
+              "target": "Package",
+              "version": "[3.10.0, )"
+            },
+            "Testcontainers.PostgreSql": {
+              "target": "Package",
+              "version": "[3.10.0, )"
+            },
             "coverlet.collector": {
               "target": "Package",
               "version": "[6.0.4, )"
