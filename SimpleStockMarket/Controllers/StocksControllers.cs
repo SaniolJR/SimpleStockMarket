@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Services;
 using DTOs;
+using Mappers;
 
 namespace Controllers;
 
@@ -10,9 +11,9 @@ public class StocksControllers : ControllerBase
 {
     private readonly IBankService _BankService;
 
-    public StocksControllers(IBankService BankServicee)
+    public StocksControllers(IBankService BankService)
     {
-        _BankService = BankServicee;
+        _BankService = BankService;
     }
 
     [HttpGet]
@@ -21,14 +22,7 @@ public class StocksControllers : ControllerBase
         var bankState = await _BankService.GetBankStateAsync();
 
         //Parse to the right format
-        var ans = new
-        {
-            Stocks = bankState.Select(s => new
-            {
-                s.Name,
-                Quantity = s.BankQuantity
-            })
-        };
+        var ans = StockMapper.StockListToDTO(bankState);
 
         return Ok(ans);
     }
@@ -36,7 +30,17 @@ public class StocksControllers : ControllerBase
     [HttpPost]
     public async Task<IActionResult> SetNewStateOfBank([FromBody] StocksListDTO dto)
     {
-        //TODO: mapping
-        return Ok();
+        var stockList = StockMapper.StocksListDtoToEntity(dto);
+        try
+        {
+            //if dto was null and stockList is null - just delete bank data
+            await _BankService.SetNewBankStateAsync(stockList);
+            return Ok();
+        }
+        catch(Exception ex)
+        {
+            return StatusCode(500,"Error durning setting new state of bank.");
+        }
+
     }
 }

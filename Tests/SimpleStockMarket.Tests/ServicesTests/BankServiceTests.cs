@@ -60,7 +60,7 @@ public class BankServiceTests
 
         // Assert
         Assert.NotNull(result);
-        Assert.Empty(result); // Sprawdza czy lista ma 0 elementów
+        Assert.Empty(result);
     }
 
      /*
@@ -80,7 +80,6 @@ public class BankServiceTests
 
         // Assert
         _stockRepositoryMock.Verify(repo => repo.ClearAllStocksAsync(), Times.Once);
-        // Sprawdzamy, czy AddNewStocksAsync NIE zostało wywołane
         _stockRepositoryMock.Verify(repo => repo.AddNewStocksAsync(It.IsAny<List<Stock>>()), Times.Never);
     }
 
@@ -111,10 +110,8 @@ public class BankServiceTests
         await _bankService.SetNewBankStateAsync(validStocks);
 
         // Assert
-        // Upewniamy się, że najpierw wyczyszczono stare dane
         _stockRepositoryMock.Verify(repo => repo.ClearAllStocksAsync(), Times.Once);
         
-        // Następnie upewniamy się, że dodano nowe
         _stockRepositoryMock.Verify(repo => repo.AddNewStocksAsync(validStocks), Times.Once);
     }
 

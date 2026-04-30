@@ -10,5 +10,5 @@ public interface IBankService
 
     public Task<List<Stock>> GetBankStateAsync();
 
-    public Task SetNewBankStateAsync(List<Stock> stocks);
+    public Task SetNewBankStateAsync(List<Stock>? stocks);
 }

@@ -37,14 +37,14 @@ public class BankService : IBankService
         return bankState;
     }
 
-    public async Task SetNewBankStateAsync(List<Stock> stocks)
+    public async Task SetNewBankStateAsync(List<Stock>? stocks)
     {
         //Clear whole current data of stocks
 
         await _stockRepository.ClearAllStocksAsync();
 
         //If List is empty just clear whole database
-        if (!stocks.IsNullOrEmpty())
+        if (stocks != null && !stocks.IsNullOrEmpty())
         {
             await _stockRepository.AddNewStocksAsync(stocks);
         }
