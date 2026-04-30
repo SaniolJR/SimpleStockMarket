@@ -229,7 +229,7 @@ public class StockRepositoryIntegrationTests
     [Fact]
     public async Task GetAllStocksAvailableAsync_CheckStocksQuantity_Possitive()
     {
-          // Arrange
+        // Arrange
         var options = new DbContextOptionsBuilder<MainDbContext>()
             .UseNpgsql(_fx.ConnectionString)
             .Options;
@@ -270,6 +270,150 @@ public class StockRepositoryIntegrationTests
         Assert.Contains(result, s => s.Name == "Google" && s.BankQuantity == 5);
         Assert.Contains(result, s => s.Name == "Nvidia" && s.BankQuantity == 0);
 
+    }
+
+
+     /*
+    ============================
+        ClearAllStocksAsync
+    ============================
+    */
+
+    [Fact]
+    public async Task ClearAllStocksAsync_ClearNoEmptyData_Possitive()
+    {
+        // Arrange
+        var options = new DbContextOptionsBuilder<MainDbContext>()
+            .UseNpgsql(_fx.ConnectionString)
+            .Options;
+
+        await using var db = new MainDbContext(options);
+
+        await db.Stocks.ExecuteDeleteAsync();
+
+        var stock1 = new Stock { Name = "Nvidia", BankQuantity = 0 };
+        var stock2 = new Stock { Name = "Intel", BankQuantity = 50 };
+        var stock3 = new Stock { Name = "AMD", BankQuantity = 25 };
+
+        db.Stocks.Add(stock1);
+        db.Stocks.Add(stock2);
+        db.Stocks.Add(stock3);
+
+        await db.SaveChangesAsync();
+
+        var repo = new StockRepository(db);
+
+        var countBefore = await db.Stocks.CountAsync();
+
+        // Act
+
+        await repo.ClearAllStocksAsync();
+
+        // Assert
+        var countAfter = await db.Stocks.CountAsync();
+        Assert.Equal(0, countAfter);
+        Assert.True(countBefore > countAfter);
+    }
+
+    [Fact]
+    public async Task ClearAllStocksAsync_ClearEmptyData_Possitive()
+    {
+        // Arrange
+        var options = new DbContextOptionsBuilder<MainDbContext>()
+            .UseNpgsql(_fx.ConnectionString)
+            .Options;
+
+        await using var db = new MainDbContext(options);
+
+        await db.Stocks.ExecuteDeleteAsync();
+
+        await db.SaveChangesAsync();
+
+        var repo = new StockRepository(db);
+
+        var countBefore = await db.Stocks.CountAsync();
+
+        // Act
+
+        await repo.ClearAllStocksAsync();
+
+        // Assert
+        var countAfter = await db.Stocks.CountAsync();
+        Assert.Equal(0, countAfter);
+        Assert.True(countBefore == countAfter);
+    }
+
+     /*
+    ============================
+        AddNewStocksAsync
+    ============================
+    */
+
+     [Fact]
+    public async Task AddNewStocksAsync_AddNewData_Possitive()
+    {
+        // Arrange
+        var options = new DbContextOptionsBuilder<MainDbContext>()
+            .UseNpgsql(_fx.ConnectionString)
+            .Options;
+
+        await using var db = new MainDbContext(options);
+
+        await db.Stocks.ExecuteDeleteAsync();
+
+        var stock1 = new Stock { Name = "Intel", BankQuantity = 50 };
+        db.Stocks.Add(stock1);
+
+        await db.SaveChangesAsync();
+
+        var repo = new StockRepository(db);
+
+        // Act
+
+        var added = new List<Stock> { new Stock { Name = "Nvidia", BankQuantity = 0 } };
+        await repo.AddNewStocksAsync(added);
+
+        // Assert
+        
+        var stocksInDb = await db.Stocks.ToListAsync();
+
+        Assert.Equal(2, stocksInDb.Count);
+        Assert.Contains(stocksInDb, s => s.Name == "Nvidia" && s.BankQuantity == 0); 
+        Assert.Contains(stocksInDb, s => s.Name == "Intel" && s.BankQuantity == 50);
+
+    }
+
+    [Fact]
+    public async Task AddNewStocksAsync_AddEmptyData_Possitive()
+    {
+        // Arrange
+        var options = new DbContextOptionsBuilder<MainDbContext>()
+            .UseNpgsql(_fx.ConnectionString)
+            .Options;
+
+        await using var db = new MainDbContext(options);
+
+        await db.Stocks.ExecuteDeleteAsync();
+
+        await db.SaveChangesAsync();
+
+        var repo = new StockRepository(db);
+
+        // Act
+
+        var added = new List<Stock> { new Stock { Name = "Nvidia", BankQuantity = 0 }, 
+                                        new Stock { Name = "AMD", BankQuantity = 2 },
+                                        new Stock { Name = "Oracle", BankQuantity = 3 } };
+        await repo.AddNewStocksAsync(added);
+
+        // Assert
+        
+        var stocksInDb = await db.Stocks.ToListAsync();
+
+        Assert.Equal(3, stocksInDb.Count);
+        Assert.Contains(stocksInDb, s => s.Name == "Nvidia" && s.BankQuantity == 0); 
+        Assert.Contains(stocksInDb, s => s.Name == "AMD" && s.BankQuantity == 2);
+        Assert.Contains(stocksInDb, s => s.Name == "Oracle" && s.BankQuantity == 3);
     }
 
 }
