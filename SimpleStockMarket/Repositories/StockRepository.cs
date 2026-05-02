@@ -13,7 +13,7 @@ public class StockRepository : IStockRepository
 
     public async Task<Stock?> GetStockByNameAsync(string name)
     {
-          return await _db.Stocks.FirstOrDefaultAsync(s => s.Name == name);
+        return await _db.Stocks.FirstOrDefaultAsync(s => s.Name == name);
     }
 
     public async Task<List<Stock>?> GetAllStocksAvailableAsync()
@@ -29,5 +29,30 @@ public class StockRepository : IStockRepository
     public async Task ClearAllStocksAsync()
     {
         await _db.Stocks.ExecuteDeleteAsync();
+    }
+
+    public async Task<bool> TryDecreaseStockInBankAtomicAsync(Stock stock)
+    {
+        int rowsAffected = await _context.Stocks
+        .Where(s => s.Id == stock.Id && s.BankQuantity > 0)
+        .ExecuteUpdateAsync(s => s.SetProperty(b => b.BankQuantity, b => b.BankQuantity - 1));
+
+        if (rowsAffected == 0)
+        {
+            return false;
+        }
+        return true;
+    }
+    public async Task<bool> TryIncreaseStockInBankAtomicAsync(Stock stock)
+    {
+        int rowsAffected = await _context.Stocks
+        .Where(s => s.Id == stock.Id)
+        .ExecuteUpdateAsync(s => s.SetProperty(b => b.BankQuantity, b => b.BankQuantity + 1));
+
+        if (rowsAffected == 0)
+        {
+            return false;
+        }
+        return true;
     }
 }
