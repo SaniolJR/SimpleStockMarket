@@ -33,7 +33,9 @@ public class StockRepository : IStockRepository
 
     public async Task<bool> TryDecreaseStockInBankAtomicAsync(Stock stock)
     {
-        int rowsAffected = await _context.Stocks
+        if (stock == null) return false;
+
+        int rowsAffected = await _db.Stocks
         .Where(s => s.Id == stock.Id && s.BankQuantity > 0)
         .ExecuteUpdateAsync(s => s.SetProperty(b => b.BankQuantity, b => b.BankQuantity - 1));
 
@@ -45,7 +47,9 @@ public class StockRepository : IStockRepository
     }
     public async Task<bool> TryIncreaseStockInBankAtomicAsync(Stock stock)
     {
-        int rowsAffected = await _context.Stocks
+        if (stock == null) return false;
+
+        int rowsAffected = await _db.Stocks
         .Where(s => s.Id == stock.Id)
         .ExecuteUpdateAsync(s => s.SetProperty(b => b.BankQuantity, b => b.BankQuantity + 1));
 

@@ -438,13 +438,15 @@ public class StockRepositoryIntegrationTests
 
         var repo = new StockRepository(db);
         var stock = await db.Stocks.FirstOrDefaultAsync(s => s.Name == "Tesla");
+        Assert.NotNull(stock);
+        Assert.NotEqual(0, stock.Id);
 
         // Act
         var result = await repo.TryDecreaseStockInBankAtomicAsync(stock);
 
         // Assert
         Assert.True(result);
-        var updatedStock = await db.Stocks.FirstOrDefaultAsync(s => s.Name == "Tesla");
+        var updatedStock = await db.Stocks.AsNoTracking().FirstOrDefaultAsync(s => s.Name == "Tesla");
         Assert.Equal(49, updatedStock.BankQuantity);
     }
 
@@ -464,13 +466,15 @@ public class StockRepositoryIntegrationTests
 
         var repo = new StockRepository(db);
         var stock = await db.Stocks.FirstOrDefaultAsync(s => s.Name == "Tesla");
+        Assert.NotNull(stock);
+        Assert.NotEqual(0, stock.Id);
 
         // Act
         var result = await repo.TryDecreaseStockInBankAtomicAsync(stock);
 
         // Assert
         Assert.True(result);
-        var updatedStock = await db.Stocks.FirstOrDefaultAsync(s => s.Name == "Tesla");
+        var updatedStock = await db.Stocks.AsNoTracking().FirstOrDefaultAsync(s => s.Name == "Tesla");
         Assert.Equal(0, updatedStock.BankQuantity);
     }
 
@@ -490,13 +494,15 @@ public class StockRepositoryIntegrationTests
 
         var repo = new StockRepository(db);
         var stock = await db.Stocks.FirstOrDefaultAsync(s => s.Name == "Tesla");
+        Assert.NotNull(stock);
+        Assert.NotEqual(0, stock.Id);
 
         // Act
         var result = await repo.TryDecreaseStockInBankAtomicAsync(stock);
 
         // Assert
         Assert.False(result);
-        var updatedStock = await db.Stocks.FirstOrDefaultAsync(s => s.Name == "Tesla");
+        var updatedStock = await db.Stocks.AsNoTracking().FirstOrDefaultAsync(s => s.Name == "Tesla");
         Assert.Equal(0, updatedStock.BankQuantity);
     }
 
@@ -613,13 +619,15 @@ public class StockRepositoryIntegrationTests
 
         var repo = new StockRepository(db);
         var stock = await db.Stocks.FirstOrDefaultAsync(s => s.Name == "Tesla");
+        Assert.NotNull(stock);
+        Assert.NotEqual(0, stock.Id);
 
         // Act
         var result = await repo.TryIncreaseStockInBankAtomicAsync(stock);
 
         // Assert
         Assert.True(result);
-        var updatedStock = await db.Stocks.FirstOrDefaultAsync(s => s.Name == "Tesla");
+        var updatedStock = await db.Stocks.AsNoTracking().FirstOrDefaultAsync(s => s.Name == "Tesla");
         Assert.Equal(51, updatedStock.BankQuantity);
     }
 
@@ -639,13 +647,15 @@ public class StockRepositoryIntegrationTests
 
         var repo = new StockRepository(db);
         var stock = await db.Stocks.FirstOrDefaultAsync(s => s.Name == "Tesla");
+        Assert.NotNull(stock);
+        Assert.NotEqual(0, stock.Id);
 
         // Act
         var result = await repo.TryIncreaseStockInBankAtomicAsync(stock);
 
         // Assert
         Assert.True(result);
-        var updatedStock = await db.Stocks.FirstOrDefaultAsync(s => s.Name == "Tesla");
+        var updatedStock = await db.Stocks.AsNoTracking().FirstOrDefaultAsync(s => s.Name == "Tesla");
         Assert.Equal(1, updatedStock.BankQuantity);
     }
 
