@@ -49,7 +49,7 @@ public class WalletRepository : IWalletRepository
     public async Task<bool> TryIncreaseStockInWalletAtomicAsync(int walletId, int stockId)
     {
         if (walletId <= 0)
-            throw new ArgumentException("Wallet IF should be > 0.", nameof(walletId));
+            throw new ArgumentException("Wallet ID should be > 0.", nameof(walletId));
 
         if (stockId <= 0)
             throw new ArgumentException("Stock ID should be > 0.", nameof(stockId));
@@ -61,6 +61,17 @@ public class WalletRepository : IWalletRepository
 
         return rowsAffected > 0;
 
+    }
+
+    public async Task CreateNewWalletBasedOnIdAsync(int id)
+    {
+        if (id <= 0)
+            throw new ArgumentException("Wallet ID should be > 0.");
+
+        Wallet wallet = new Wallet { Id = id };
+
+        await _db.Wallets.AddAsync(wallet);
+        await _db.SaveChangesAsync();
     }
 
 }

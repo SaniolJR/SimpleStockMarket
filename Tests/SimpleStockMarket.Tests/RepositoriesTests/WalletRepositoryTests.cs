@@ -687,4 +687,54 @@ public class WalletRepositoryIntegrationTests
         Assert.False(result);
     }
 
+    /*
+    ============================
+        CreateNewWalletBasedOnIdAsync
+    ============================
+    */
+
+    [Fact]
+    public async Task CreateNewWalletBasedOnIdAsync_WalletIdIsNotGreaterThan0_ThrowException()
+    {
+        // Arrange
+        var options = new DbContextOptionsBuilder<MainDbContext>()
+            .UseNpgsql(_fx.ConnectionString)
+            .Options;
+
+        await using var db = new MainDbContext(options);
+
+        await db.Wallets.ExecuteDeleteAsync();
+
+        var repo = new WalletRepository(db);
+
+        // Act & Assert
+        await Assert.ThrowsAsync<ArgumentException>(async () => await repo.CreateNewWalletBasedOnIdAsync(0));
+        await Assert.ThrowsAsync<ArgumentException>(async () => await repo.CreateNewWalletBasedOnIdAsync(-1));
+    }
+    [Fact]
+    public async Task CreateNewWalletBasedOnIdAsync_AddWalletProperly_Possitive()
+    {
+        // Arrange
+        var options = new DbContextOptionsBuilder<MainDbContext>()
+            .UseNpgsql(_fx.ConnectionString)
+            .Options;
+
+        await using var db = new MainDbContext(options);
+
+        await db.Wallets.ExecuteDeleteAsync();
+
+        var repo = new WalletRepository(db);
+
+        // Act
+
+        await repo.CreateNewWalletBasedOnIdAsync(10);
+
+        // Assert
+        var walletInDb = await db.Wallets
+            .AsNoTracking()
+            .FirstOrDefaultAsync(w => w.Id == 10);
+
+        Assert.NotNull(walletInDb);
+    }
+
 }
