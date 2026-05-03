@@ -12,7 +12,29 @@ public class WalletRepository : IWalletRepository
 
     public async Task<Wallet?> GetWalletByIdAsync(int id)
     {
-        return null;
+        if (id <= 0)
+        {
+            return null;
+        }
+        return await _db.Wallets.FirstOrDefaultAsync(s => s.Id == id);
+    }
+    public async Task<int> GetStockQuantityInWalletByIdAsync(Wallet wallet, string stockName)
+    {
+        if (wallet == null) return -1;
+        if (string.IsNullOrWhiteSpace(stockName)) return -1;
+
+        var walletStock = wallet.Stocks.FirstOrDefault(s => s.Stock.Name == stockName);
+
+        if (walletStock == null) return -1;
+        return walletStock.Quantity;
+    }
+    public async Task<bool> TryDecreaseStockInWalletAtomicAsync(Wallet wallet)
+    {
+        return true;
+    }
+    public async Task<bool> TryIncreaseStockInWalletAtomicAsync(Wallet wallet)
+    {
+        return true;
     }
 
 }

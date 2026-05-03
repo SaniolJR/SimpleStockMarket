@@ -10,4 +10,7 @@ public interface IStockRepository
 
     Task AddNewStocksAsync(List<Stock> stocks);
     Task ClearAllStocksAsync();
+
+    Task<bool> TryDecreaseStockInBankAtomicAsync(Stock stock);
+    Task<bool> TryIncreaseStockInBankAtomicAsync(Stock stock);
 }

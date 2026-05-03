@@ -14,11 +14,15 @@ public class BankService : IBankService
 
     public Task ProcessBuyRequest(string name, int walletID)
     {
+        //powinien zwracac jakeigo ResoultPattern
         //wydobyj obiekt akcji
         //wydobyj obiekt portfela
-        
-        //sprawdz czy akcja jest dostepna do kupna
-        //
+
+        //TryDecreaseStockInBankAtomicAsync()
+
+        //TryDecreaseStockInWalletAtomicAsync()
+
+        // Czy przeszło itp walidacja
         return null;
     }
 
