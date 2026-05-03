@@ -20,7 +20,7 @@ public class WalletRepository : IWalletRepository
                 .Include(w => w.WalletStocks)
                 .FirstOrDefaultAsync(w => w.Id == id);
     }
-    public async Task<int> GetStockQuantityInWalletByIdAsync(Wallet wallet, string stockName)
+    public async Task<int> GetStockQuantityInWalletByIdAsync(Wallet? wallet, string stockName)
     {
         if (wallet == null) return -1;
         if (string.IsNullOrWhiteSpace(stockName)) return -1;

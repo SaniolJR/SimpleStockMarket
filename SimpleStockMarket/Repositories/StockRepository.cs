@@ -33,6 +33,7 @@ public class StockRepository : IStockRepository
 
     public async Task<bool> TryDecreaseStockInBankAtomicAsync(Stock stock)
     {
+        //Todo: change to throw exception
         if (stock == null) return false;
 
         int rowsAffected = await _db.Stocks
