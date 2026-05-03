@@ -14,4 +14,5 @@ public interface IBankService
     public Task<int> GetStocksQuantityInWalletAsync(string name, int walletID);
 
     public Task<List<WalletStock>> GetWalletsCurrentStateAsync(int walletID);
+    public Task<List<AuditLog>> GetBankAuditLog();
 }

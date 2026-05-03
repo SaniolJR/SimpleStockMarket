@@ -9,12 +9,14 @@ public class BankService : IBankService
 {
     private readonly IStockRepository _stockRepository;
     private readonly IWalletRepository _walletRepository;
+    private readonly ILogRepository _logRepository;
     private readonly MainDbContext? _db;
 
-    public BankService(IStockRepository stockRepository, IWalletRepository walletRepository, MainDbContext? db)
+    public BankService(IStockRepository stockRepository, IWalletRepository walletRepository, ILogRepository logRepository, MainDbContext? db)
     {
         _stockRepository = stockRepository;
         _walletRepository = walletRepository;
+        _logRepository = logRepository;
         _db = db;
     }
 
@@ -38,6 +40,8 @@ public class BankService : IBankService
             if (wallet == null)
             {
                 await _walletRepository.CreateNewWalletBasedOnIdAsync(walletID);
+                wallet = await _walletRepository.GetWalletByIdIncludingWalletStocksAsync(walletID);
+                if (wallet == null) return 500;
             }
 
             // try decrease stock quantity in bank
@@ -59,6 +63,10 @@ public class BankService : IBankService
             //commit changes of transaction
             if (transaction != null)
                 await transaction.CommitAsync();
+
+            //success make log
+            var transactionType = TransactionType.buy;
+            await _logRepository.CreateAndLogTransactionAsync(wallet, stock, transactionType);
             return 200;
         }
         catch (Exception)
@@ -113,6 +121,10 @@ public class BankService : IBankService
             //commit changes of transaction
             if (transaction != null)
                 await transaction.CommitAsync();
+
+            //success make log
+            var transactionType = TransactionType.sell;
+            await _logRepository.CreateAndLogTransactionAsync(wallet, stock, transactionType);
             return 200;
         }
         catch (Exception)
@@ -171,5 +183,11 @@ public class BankService : IBankService
 
         return currentState;
 
+    }
+
+    public async Task<List<AuditLog>> GetBankAuditLog()
+    {
+        var auditLogs = await _logRepository.GetAllLogs();
+        return auditLogs.OrderBy(l => l.TransactionDate).ToList();
     }
 }
