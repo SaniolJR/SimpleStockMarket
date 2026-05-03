@@ -107,7 +107,7 @@ namespace SimpleStockMarket.Migrations
 
                     b.HasIndex("WalletId");
 
-                    b.ToTable("WalletStock");
+                    b.ToTable("WalletStocks");
                 });
 
             modelBuilder.Entity("Entities.AuditLog", b =>
@@ -138,7 +138,7 @@ namespace SimpleStockMarket.Migrations
                         .IsRequired();
 
                     b.HasOne("Entities.Wallet", "Wallet")
-                        .WithMany("Stocks")
+                        .WithMany("WalletStocks")
                         .HasForeignKey("WalletId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -150,7 +150,7 @@ namespace SimpleStockMarket.Migrations
 
             modelBuilder.Entity("Entities.Wallet", b =>
                 {
-                    b.Navigation("Stocks");
+                    b.Navigation("WalletStocks");
                 });
 #pragma warning restore 612, 618
         }

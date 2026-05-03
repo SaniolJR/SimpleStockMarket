@@ -10,31 +10,57 @@ public class WalletRepository : IWalletRepository
 
     public WalletRepository(MainDbContext db) => _db = db;
 
-    public async Task<Wallet?> GetWalletByIdAsync(int id)
+    public async Task<Wallet?> GetWalletByIdIncludingWalletStocksAsync(int id)
     {
         if (id <= 0)
         {
             return null;
         }
-        return await _db.Wallets.FirstOrDefaultAsync(s => s.Id == id);
+        return await _db.Wallets
+                .Include(w => w.WalletStocks)
+                .FirstOrDefaultAsync(w => w.Id == id);
     }
     public async Task<int> GetStockQuantityInWalletByIdAsync(Wallet wallet, string stockName)
     {
         if (wallet == null) return -1;
         if (string.IsNullOrWhiteSpace(stockName)) return -1;
 
-        var walletStock = wallet.Stocks.FirstOrDefault(s => s.Stock.Name == stockName);
+        var walletStock = wallet.WalletStocks.FirstOrDefault(s => s.Stock.Name == stockName);
 
         if (walletStock == null) return -1;
         return walletStock.Quantity;
     }
-    public async Task<bool> TryDecreaseStockInWalletAtomicAsync(Wallet wallet)
+    public async Task<bool> TryDecreaseStockInWalletAtomicAsync(int walletId, int stockId)
     {
-        return true;
+        if (walletId <= 0)
+            throw new ArgumentException("Wallet IF should be > 0.", nameof(walletId));
+
+        if (stockId <= 0)
+            throw new ArgumentException("Stock ID should be > 0.", nameof(stockId));
+
+        int rowsAffected = await _db.WalletStocks
+            .Where(ws => ws.WalletId == walletId
+                      && ws.StockId == stockId
+                      && ws.Quantity > 0)
+            .ExecuteUpdateAsync(s => s.SetProperty(ws => ws.Quantity, ws => ws.Quantity - 1));
+
+        return rowsAffected > 0;
     }
-    public async Task<bool> TryIncreaseStockInWalletAtomicAsync(Wallet wallet)
+    public async Task<bool> TryIncreaseStockInWalletAtomicAsync(int walletId, int stockId)
     {
-        return true;
+        if (walletId <= 0)
+            throw new ArgumentException("Wallet IF should be > 0.", nameof(walletId));
+
+        if (stockId <= 0)
+            throw new ArgumentException("Stock ID should be > 0.", nameof(stockId));
+
+        int rowsAffected = await _db.WalletStocks
+        .Where(ws => ws.WalletId == walletId
+                && ws.StockId == stockId)
+        .ExecuteUpdateAsync(s => s.SetProperty(ws => ws.Quantity, ws => ws.Quantity + 1));
+
+        return rowsAffected > 0;
+
     }
 
 }

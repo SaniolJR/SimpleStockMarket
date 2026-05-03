@@ -4,8 +4,8 @@ namespace Services;
 
 public interface IWalletRepository
 {
-    Task<Wallet?> GetWalletByIdAsync(int id);
+    Task<Wallet?> GetWalletByIdIncludingWalletStocksAsync(int id);
     Task<int> GetStockQuantityInWalletByIdAsync(Wallet wallet, string stockName);
-    Task<bool> TryDecreaseStockInWalletAtomicAsync(Wallet wallet);
-    Task<bool> TryIncreaseStockInWalletAtomicAsync(Wallet wallet);
+    Task<bool> TryDecreaseStockInWalletAtomicAsync(int walletId, int stockId);
+    Task<bool> TryIncreaseStockInWalletAtomicAsync(int walletId, int stockId);
 }
