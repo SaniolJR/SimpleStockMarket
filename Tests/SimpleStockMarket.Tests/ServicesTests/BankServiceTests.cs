@@ -9,13 +9,17 @@ public class BankServiceTests
 {
     private readonly Mock<IStockRepository> _stockRepositoryMock;
     private readonly Mock<IWalletRepository> _walletRepositoryMock;
+    private readonly Mock<ILogRepository> _LogRepositoryMock;
     private readonly BankService _bankService;
 
     public BankServiceTests()
     {
         _stockRepositoryMock = new Mock<IStockRepository>();
         _walletRepositoryMock = new Mock<IWalletRepository>();
-        _bankService = new BankService(_stockRepositoryMock.Object, _walletRepositoryMock.Object, null!);
+        _LogRepositoryMock = new Mock<ILogRepository>();
+        _bankService = new BankService(_stockRepositoryMock.Object,
+                                         _walletRepositoryMock.Object,
+                                         _LogRepositoryMock.Object, null!);
     }
 
     /*
@@ -143,6 +147,8 @@ public class BankServiceTests
         // Arrange
         var stock = new Stock { Id = 1, Name = "Tesla", BankQuantity = 0 };
         _stockRepositoryMock.Setup(r => r.GetStockByNameAsync("Tesla")).ReturnsAsync(stock);
+        _walletRepositoryMock.Setup(r => r.GetWalletByIdIncludingWalletStocksAsync(1))
+            .ReturnsAsync(new Wallet { Id = 1 });
         _stockRepositoryMock.Setup(r => r.TryDecreaseStockInBankAtomicAsync(stock)).ReturnsAsync(false);
 
         // Act
@@ -158,7 +164,9 @@ public class BankServiceTests
         // Arrange
         var stock = new Stock { Id = 1, Name = "Tesla", BankQuantity = 10 };
         _stockRepositoryMock.Setup(r => r.GetStockByNameAsync("Tesla")).ReturnsAsync(stock);
-        _walletRepositoryMock.Setup(r => r.GetWalletByIdIncludingWalletStocksAsync(1)).ReturnsAsync((Wallet)null!);
+        _walletRepositoryMock.SetupSequence(r => r.GetWalletByIdIncludingWalletStocksAsync(1))
+            .ReturnsAsync((Wallet)null!)
+            .ReturnsAsync(new Wallet { Id = 1 });
 
         _stockRepositoryMock.Setup(r => r.TryDecreaseStockInBankAtomicAsync(stock)).ReturnsAsync(true);
         _walletRepositoryMock.Setup(r => r.TryIncreaseStockInWalletAtomicAsync(1, stock.Id)).ReturnsAsync(true);
